@@ -6,13 +6,14 @@ authors = ["SuperInstance Ranch"]
 description = "A Ranch Ecosystem that evolves into a SuperInstance - specialized intelligences managed by a loyal Border Collie"
 license = "MIT"
 readme = "README.md"
-keywords = ["ai", "edge", "lora", "jetson", "agents"]
+keywords = ["ai", "edge", "lora", "jetson", "agents", "open-genomics"]
 categories = ["science", "asynchronous"]
 
 [dependencies]
 # Async Runtime
-tokio = { version = "1.35", features = ["full", "rt-multi-thread", "sync", "time", "fs", "io-util", "macros", "signal"] }
+tokio = { version = "1.35", features = ["full", "rt-multi-thread", "sync", "time", "fs", "io-util", "macros", "signal", "process"] }
 tokio-util = { version = "0.7", features = ["rt"] }
+tokio-stream = "0.1"
 futures = "0.3"
 async-trait = "0.1"
 
@@ -24,6 +25,14 @@ crossterm = { version = "0.27", features = ["event-stream"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 toml = "0.8"
+
+# Markdown Parsing (Open Genomics)
+pulldown-cmark = "0.10"
+regex = "1.10"
+
+# File Watching (Hot Reload)
+notify = "6.1"
+notify-debouncer-full = "0.3"
 
 # Database (Stud Book)
 rusqlite = { version = "0.30", features = ["bundled"] }
@@ -55,11 +64,6 @@ config = "0.14"
 # CPU/Thread priority (for Hogs)
 thread-priority = "0.16"
 
-# GPU/Tensor (optional, for real inference)
-# candle-core = { version = "0.3", optional = true }
-# candle-transformers = { version = "0.3", optional = true }
-# candle-nn = { version = "0.3", optional = true }
-
 # Safe tensors for LoRA
 safetensors = "0.4"
 ndarray = "0.15"
@@ -68,17 +72,44 @@ ndarray = "0.15"
 metrics = "0.21"
 metrics-exporter-prometheus = { version = "0.12", optional = true }
 
-# HTTP client (for Ducks)
-reqwest = { version = "0.11", features = ["json", "rustls-tls"] }
+# HTTP client (for Ducks and API calls)
+reqwest = { version = "0.11", features = ["json", "rustls-tls", "multipart", "stream"] }
+
+# WebSocket
+tokio-tungstenite = { version = "0.21", features = ["rustls-tls-webpki-roots"] }
 
 # System info
 sysinfo = "0.30"
+
+# Discord Integration
+[dependencies.serenity]
+version = "0.12"
+default-features = false
+features = ["client", "gateway", "rustls_backend", "model", "cache", "http"]
+
+# Telegram Integration
+teloxide = { version = "0.12", features = ["rustls"], optional = true }
+
+# URL handling
+url = "2.5"
+
+# Directory handling
+directories = "5.0"
+
+# UUID generation
+uuid = { version = "1.7", features = ["v4", "serde"] }
+
+# Dialoguer for onboarding CLI
+dialoguer = "0.11"
+console = "0.15"
 
 [features]
 default = []
 gpu = []
 tensorrt = []
 prometheus = ["metrics-exporter-prometheus"]
+telegram = ["teloxide"]
+full = ["telegram", "prometheus"]
 
 [profile.release]
 lto = true
@@ -92,3 +123,7 @@ opt-level = 1
 [[bin]]
 name = "superinstance"
 path = "src/main.rs"
+
+[[bin]]
+name = "superinstance-onboard"
+path = "src/bin/onboard.rs"
