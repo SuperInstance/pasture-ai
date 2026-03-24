@@ -1,7 +1,38 @@
 //! SuperInstance Web Dashboard - Axum + Dioxus
 //!
 //! Single-binary web UI that compiles into the same 4.2 MB binary.
-//! No node_modules, no separate processes.
+//! No node_modules, no separate processes, zero Node.js runtime.
+//!
+//! ## Architecture
+//!
+//! ```text
+//! ┌─────────────────────────────────────────────────────────────┐
+//! │                  SINGLE <5 MB BINARY                        │
+//! │                                                              │
+//! │   ┌───────────────┐    ┌───────────────┐    ┌───────────┐  │
+//! │   │   TUI Mode    │    │   Web Mode    │    │  API Mode │  │
+//! │   │   (ratatui)   │    │ (Axum+Dioxus) │    │   (Axum)  │  │
+//! │   │               │    │               │    │           │  │
+//! │   │  Terminal ◄───┼────┼───► Browser   │    │ REST/WS ◄─┼─ │
+//! │   │               │    │               │    │           │  │
+//! │   └───────────────┘    └───────────────┘    └───────────┘  │
+//! │                               │                              │
+//! │                    ┌──────────▼──────────┐                  │
+//! │                    │    BORDER COLLIE    │                  │
+//! │                    │  (Tokio Runtime)    │                  │
+//! │                    └─────────────────────┘                  │
+//! └─────────────────────────────────────────────────────────────┘
+//! ```
+//!
+//! ## Zero Node.js Philosophy
+//!
+//! Traditional AI stacks require: Node.js + Python + Redis + DB processes.
+//! SuperInstance requires: ONE Rust binary.
+//!
+//! - All assets embedded in binary
+//! - WebSocket for real-time updates
+//! - Dioxus for reactive UI (compiles to WASM, served by Axum)
+//! - No build step for users - just run the binary
 
 pub mod api;
 pub mod dashboard;
