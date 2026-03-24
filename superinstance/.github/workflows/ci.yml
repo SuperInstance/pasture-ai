@@ -1,0 +1,148 @@
+name: SuperInstance CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+
+jobs:
+  # ===========================================
+  # RUST BUILD & TEST
+  # ===========================================
+  rust-check:
+    name: Rust Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      
+      - name: Cache Cargo
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+      
+      - name: Check formatting
+        run: cargo fmt -- --check
+        working-directory: superinstance
+      
+      - name: Clippy
+        run: cargo clippy -- -D warnings
+        working-directory: superinstance
+      
+      - name: Build
+        run: cargo build --release
+        working-directory: superinstance
+      
+      - name: Run tests
+        run: cargo test --release
+        working-directory: superinstance
+
+  # ===========================================
+  # BUN BUILD
+  # ===========================================
+  bun-build:
+    name: Bun Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      
+      - name: Install dependencies
+        run: bun install
+        working-directory: superinstance
+      
+      - name: Build
+        run: bun run build
+        working-directory: superinstance
+
+  # ===========================================
+  # DOCUMENTATION CHECK
+  # ===========================================
+  docs-check:
+    name: Documentation Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check README exists
+        run: |
+          test -f superinstance/README.md
+          test -f superinstance/src/README.md
+          test -f superinstance/pasture/README.md
+          test -f superinstance/genetics/README.md
+      
+      - name: Check .env.example exists
+        run: test -f superinstance/.env.example
+      
+      - name: Check no .env committed
+        run: test ! -f superinstance/.env
+
+  # ===========================================
+  # SECURITY SCAN
+  # ===========================================
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      
+      - name: Run cargo audit
+        run: |
+          cargo install cargo-audit
+          cargo audit
+        working-directory: superinstance
+        continue-on-error: true
+
+  # ===========================================
+  # RELEASE (on tag)
+  # ===========================================
+  release:
+    name: Release
+    needs: [rust-check, bun-build, docs-check]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      
+      - name: Build release
+        run: cargo build --release
+        working-directory: superinstance
+      
+      - name: Create release archive
+        run: |
+          tar -czvf superinstance-${{ github.ref_name }}-linux-x86_64.tar.gz \
+            -C superinstance/target/release superinstance \
+            -C superinstance README.md Makefile \
+            -C superinstance pasture \
+            -C superinstance genetics
+      
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: superinstance-*.tar.gz
+          generate_release_notes: true
