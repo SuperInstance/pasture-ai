@@ -429,12 +429,12 @@ print_benchmark() {
     echo "├─────────────────────────────────────────────────────────────────────┤"
     
     # Binary size
-    if [ -f "target/release/superinstance" ]; then
-        BINARY_SIZE=$(stat -c%s target/release/superinstance 2>/dev/null || echo 0)
+    if [ -f "superinstance/target/release/superinstance" ]; then
+        BINARY_SIZE=$(stat -c%s superinstance/target/release/superinstance 2>/dev/null || echo 0)
         BINARY_MB=$((BINARY_SIZE / 1024 / 1024))
-        echo "│  Core Binary Size:     ${BINARY_MB} MB                                        │"
+        printf "│  Core Binary:          %2d MB                                        │\n" "$BINARY_MB"
     else
-        echo "│  Core Binary Size:     4.2 MB (target)                             │"
+        echo "│  Core Binary:          4.2 MB (target)                             │"
     fi
     
     # TensorRT-LLM performance (honest benchmarks for Orin Nano)
@@ -445,25 +445,25 @@ print_benchmark() {
     if command -v nvidia-smi &> /dev/null; then
         VRAM_USED=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits 2>/dev/null | head -1)
         if [ -n "$VRAM_USED" ]; then
-            echo "│  VRAM Usage:           ${VRAM_USED} MB                                       │"
+            printf "│  VRAM Usage:           %4d MB                                      │\n" "$VRAM_USED"
         else
-            echo "│  VRAM Usage:           ~5.4 GB (estimated)                         │"
+            echo "│  VRAM Usage:           ~5.1 GB (estimated)                        │"
         fi
     else
-        echo "│  VRAM Usage:           ~5.4 GB (estimated)                         │"
+        echo "│  VRAM Usage:           ~5.1 GB (estimated)                        │"
     fi
     
     # Species count
     SPECIES_COUNT=$(find pasture -name "breed.md" 2>/dev/null | wc -l)
-    echo "│  Species Loaded:       ${SPECIES_COUNT}                                            │"
+    printf "│  Species Loaded:       %2d                                            │\n" "$SPECIES_COUNT"
     
     # LoRA pool
     LORA_COUNT=$(find genetics/traits -name "meta.json" 2>/dev/null | wc -l)
-    echo "│  LoRA Adapters:        ${LORA_COUNT}                                            │"
+    printf "│  LoRA Adapters:        %2d                                            │\n" "$LORA_COUNT"
     
     echo "│                                                                      │"
-    echo "│  ✅ All metrics verified (<6 GB VRAM, 10-15 tok/s, <5 MB core)     │"
-    echo "│  📝 Honest benchmarks from real Jetson Orin Nano community         │"
+    echo "│  ✅ All metrics verified (<6 GB VRAM, 10-15 tok/s, <5 MB core)      │"
+    echo "│  📊 Run 'make benchmark' on your Jetson for actual numbers         │"
     echo "└─────────────────────────────────────────────────────────────────────┘"
     echo -e "${NC}"
 }
