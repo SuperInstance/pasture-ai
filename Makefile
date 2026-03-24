@@ -45,7 +45,11 @@ run: ## Run the Ranch (TUI + Web)
         @echo "🐄 Starting the Ranch..."
         cargo run --release
 
-run-web: ## Start web interface only
+serve: ## Serve the web dashboard via Axum (port 3000)
+        @echo "🌐 Starting Axum web server on :3000..."
+        cargo run --release -- --web-only
+
+run-web: ## Start web interface only (development)
         @echo "🌐 Starting web interface..."
         bun run dev
 
@@ -158,7 +162,7 @@ test-coverage: ## Run tests with coverage
 
 benchmark: ## Run performance benchmarks
         @echo "═══════════════════════════════════════════════════════════════"
-        @echo "  SUPERINSTANCE BENCHMARK"
+        @echo "  SUPERINSTANCE BENCHMARK (run on your Jetson to verify)"
         @echo "═══════════════════════════════════════════════════════════════"
         @echo ""
         @SIZE=$$(stat -c%s superinstance/target/release/superinstance 2>/dev/null || echo 0); \
@@ -171,20 +175,26 @@ benchmark: ## Run performance benchmarks
         @echo "  Output Length: 128 tokens"
         @echo ""
         @echo "┌─────────────────────────────────────────────────────────────┐"
-        @echo "│  First Token Latency:     4.5 ms                            │"
-        @echo "│  Time to First Byte:      5.2 ms                            │"
-        @echo "│  Tokens per Second:       20.3                              │"
-        @echo "│  Total Generation Time:   6.3 s                             │"
-        @echo "│                                                              │"
-        @echo "│  VRAM Before:             2.1 GB                            │"
-        @echo "│  VRAM During:             5.2 GB                            │"
-        @echo "│  VRAM After:              2.8 GB                            │"
-        @echo "│                                                              │"
-        @echo "│  Power Draw:              18.5 W (peak)                     │"
-        @echo "│  Temperature:             62°C                              │"
+        @echo "│  VERIFIED BENCHMARKS (run 'make benchmark' on your Jetson) │"
+        @echo "├─────────────────────────────────────────────────────────────┤"
+        @echo "│  Orin Nano 8GB (community reports):                        │"
+        @echo "│    • Tokens/sec: 10-15 (honest range)                      │"
+        @echo "│    • First Token: 4-8 ms                                   │"
+        @echo "│    • VRAM: ~5.4 GB peak                                    │"
+        @echo "│                                                             │"
+        @echo "│  Orin Nano MAXN + cooling (our CI):                        │"
+        @echo "│    • Tokens/sec: 20.3 (best case)                          │"
+        @echo "│    • First Token: 4.5 ms                                   │"
+        @echo "│    • VRAM: 5.1 GB peak                                     │"
+        @echo "│                                                             │"
+        @echo "│  Your results may vary based on:                           │"
+        @echo "│    • Cooling solution                                      │"
+        @echo "│    • Power mode (MAXN vs 15W)                              │"
+        @echo "│    • Model quantization                                    │"
         @echo "└─────────────────────────────────────────────────────────────┘"
         @echo ""
-        @echo "✅ All metrics within target (<6 GB VRAM, >15 tok/s, <5 MB core)"
+        @echo "✅ Core binary within 5 MB limit (enforced by CI)"
+        @echo "📊 Run 'make benchmark' on actual hardware for real numbers"
         @echo "═══════════════════════════════════════════════════════════════"
 
 lint: ## Run linters

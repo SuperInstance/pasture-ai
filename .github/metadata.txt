@@ -1,0 +1,32 @@
+# GitHub Repository Metadata
+# =========================
+# IMPORTANT: Set these manually in GitHub Settings → General
+
+## Description (one line)
+SuperInstance: 4.2 MB single-binary AI Ranch on $499 Jetson. TensorRT-LLM Collie + Dioxus web UI + breed.md abilities. Infinite extensibility, zero bloat, honest benchmarks.
+
+## Topics (add all of these)
+ai
+local-ai
+llm
+lora
+agents
+rust
+tensorrt-llm
+crdt
+jetson
+dioxus
+axum
+modular
+extensible
+single-binary
+
+## Homepage URL
+https://superinstance.ai
+
+## How to Set
+1. Go to https://github.com/SuperInstance/superinstance/settings
+2. In the "General" section, find "Repository name" and "Description"
+3. Paste the description above
+4. In "Topics", add each topic one by one (or comma-separated)
+5. Click "Save changes"
