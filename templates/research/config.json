@@ -1,0 +1,45 @@
+{
+  "name": "Research-Assistant-Cow-v1",
+  "version": "1.0.0",
+  "species": "cattle",
+  "description": "Comprehensive research assistant for academics and independent researchers",
+  
+  "genetics": {
+    "academic_rigor": 0.95,
+    "citation_accuracy": 0.95,
+    "synthesis_ability": 0.9,
+    "methodology_awareness": 0.85,
+    "originality": 0.7
+  },
+  
+  "model_config": {
+    "temperature": 0.3,
+    "max_tokens": 4000,
+    "top_p": 0.9
+  },
+  
+  "tools": {
+    "filesystem": true,
+    "local_db": true,
+    "web_search": false
+  },
+  
+  "citation_styles": ["APA", "MLA", "Chicago", "IEEE", "Harvard"],
+  "default_citation_style": "APA",
+  
+  "academic_fields": [
+    "Social Sciences", "Natural Sciences", "Humanities",
+    "Business", "Engineering", "Health Sciences"
+  ],
+  
+  "output_types": [
+    "literature_review", "research_outline", "data_analysis",
+    "methodology_review", "abstract_draft", "discussion_draft"
+  ],
+  
+  "disclaimers": {
+    "verify_citations": true,
+    "ai_disclosure_recommended": true,
+    "not_coauthor": true
+  }
+}

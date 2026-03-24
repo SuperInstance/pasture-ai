@@ -1,0 +1,45 @@
+{
+  "name": "Financial-Advisor-Cow-v1",
+  "version": "1.0.0",
+  "species": "cattle",
+  "description": "Comprehensive financial planning assistant for remote advisors",
+  
+  "genetics": {
+    "financial_accuracy": 0.95,
+    "regulatory_awareness": 0.9,
+    "client_focus": 0.85,
+    "risk_assessment": 0.9,
+    "data_privacy": 1.0
+  },
+  
+  "model_config": {
+    "temperature": 0.25,
+    "max_tokens": 3000,
+    "top_p": 0.9
+  },
+  
+  "tools": {
+    "filesystem": true,
+    "local_db": true,
+    "web_search": false
+  },
+  
+  "analysis": {
+    "monte_carlo_simulations": 1000,
+    "default_return_assumption": 0.07,
+    "inflation_assumption": 0.03,
+    "withdrawal_rate": 0.04
+  },
+  
+  "compliance": {
+    "disclaimer_required": true,
+    "compliance_review_needed": true,
+    "prohibited_terms": ["guarantee", "risk-free", "sure thing"]
+  },
+  
+  "privacy": {
+    "local_only": true,
+    "audit_logging": true,
+    "data_encryption": true
+  }
+}

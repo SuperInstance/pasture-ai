@@ -1,0 +1,48 @@
+{
+  "name": "Legal-Review-Cow-v1",
+  "version": "1.0.0",
+  "species": "cattle",
+  "description": "Privacy-conscious legal document review for remote practitioners",
+  
+  "genetics": {
+    "legal_precision": 0.95,
+    "risk_identification": 0.9,
+    "client_advocacy": 0.85,
+    "citation_accuracy": 0.9,
+    "confidentiality": 1.0
+  },
+  
+  "model_config": {
+    "temperature": 0.15,
+    "max_tokens": 4000,
+    "top_p": 0.85
+  },
+  
+  "tools": {
+    "filesystem": true,
+    "local_db": true,
+    "web_search": false
+  },
+  
+  "jurisdictions": ["California", "New York", "Delaware", "Federal"],
+  
+  "document_types": [
+    "NDA", "Employment Agreement", "Service Agreement",
+    "License Agreement", "Terms of Service", "Privacy Policy",
+    "Lease Agreement", "Purchase Agreement", "Settlement Agreement"
+  ],
+  
+  "clause_library": {
+    "enabled": true,
+    "categories": [
+      "Confidentiality", "Indemnification", "Limitation of Liability",
+      "Termination", "Governing Law", "Dispute Resolution"
+    ]
+  },
+  
+  "privacy": {
+    "local_only": true,
+    "audit_logging": true,
+    "privileged_communication_handling": true
+  }
+}

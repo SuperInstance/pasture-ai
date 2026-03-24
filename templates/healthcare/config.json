@@ -1,0 +1,56 @@
+{
+  "name": "Healthcare-Triage-Cow-v1",
+  "version": "1.0.0",
+  "species": "cattle",
+  "description": "HIPAA-conscious clinical triage assistant for remote healthcare workers",
+  
+  "genetics": {
+    "clinical_accuracy": 0.95,
+    "empathy_tone": 0.8,
+    "structured_output": 0.9,
+    "risk_awareness": 0.9,
+    "privacy_conscious": 1.0
+  },
+  
+  "model_config": {
+    "temperature": 0.2,
+    "max_tokens": 1000,
+    "top_p": 0.9,
+    "frequency_penalty": 0.1
+  },
+  
+  "tools": {
+    "filesystem": true,
+    "local_db": true,
+    "gmail_api": false,
+    "calendar_api": false,
+    "web_search": false
+  },
+  
+  "alerts": {
+    "red_flag_keywords": [
+      "chest pain", "shortness of breath", "stroke", "suicide",
+      "severe bleeding", "unconscious", "seizure", "anaphylaxis"
+    ],
+    "escalation_contacts": [
+      {
+        "name": "Supervising Physician",
+        "method": "internal",
+        "priority": "immediate"
+      }
+    ]
+  },
+  
+  "documentation": {
+    "formats": ["SOAP", "H&P", "Progress Note", "Discharge Summary"],
+    "icd10_enabled": true,
+    "auto_cpt_suggestions": true
+  },
+  
+  "privacy": {
+    "local_only": true,
+    "no_cloud_fallback": true,
+    "audit_logging": true,
+    "retention_days": 2555
+  }
+}

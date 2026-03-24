@@ -33,7 +33,9 @@ import {
   Activity, Cpu, HardDrive, Wifi, Zap, Moon, Sun, Terminal,
   Bot, MessageSquare, Database, GitBranch, Clock, TrendingUp,
   AlertCircle, CheckCircle2, Loader2, Pause, Play, Settings,
-  ChevronRight, Sparkles, Brain, Heart, Target
+  ChevronRight, Sparkles, Brain, Heart, Target, LayoutTemplate,
+  Stethoscope, GraduationCap, Scale, DollarSign, FlaskConical,
+  Code, PenTool, Headphones, ClipboardList, Newspaper, Download
 } from 'lucide-react'
 
 /**
@@ -387,8 +389,9 @@ export default function SuperInstanceDashboard() {
 
             {/* Main Dashboard Tabs */}
             <Tabs defaultValue="activity" className="w-full">
-              <TabsList className="grid w-full grid-cols-4 bg-slate-800/50">
+              <TabsList className="grid w-full grid-cols-5 bg-slate-800/50">
                 <TabsTrigger value="activity" className="text-xs">Activity</TabsTrigger>
+                <TabsTrigger value="templates" className="text-xs">Templates</TabsTrigger>
                 <TabsTrigger value="genetics" className="text-xs">Genetics</TabsTrigger>
                 <TabsTrigger value="memory" className="text-xs">Memory</TabsTrigger>
                 <TabsTrigger value="channels" className="text-xs">Channels</TabsTrigger>
@@ -417,6 +420,60 @@ export default function SuperInstanceDashboard() {
                         ))}
                       </div>
                     </ScrollArea>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              
+              <TabsContent value="templates" className="mt-4">
+                <Card className="bg-slate-900/50 border-slate-800/50 backdrop-blur">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm font-medium flex items-center gap-2">
+                      <LayoutTemplate className="w-4 h-4 text-violet-400" />
+                      Template Gallery
+                    </CardTitle>
+                    <CardDescription>Plug-and-play agents for distant workers</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ScrollArea className="h-80">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {[
+                          { id: 'healthcare', name: 'Healthcare Triage', icon: Stethoscope, color: 'text-red-400', bg: 'bg-red-900/20', desc: 'Patient triage & documentation', target: 'Remote nurses, telehealth' },
+                          { id: 'education', name: 'Education Assistant', icon: GraduationCap, color: 'text-blue-400', bg: 'bg-blue-900/20', desc: 'Lesson plans, grading, feedback', target: 'Remote teachers, tutors' },
+                          { id: 'legal', name: 'Legal Document Review', icon: Scale, color: 'text-amber-400', bg: 'bg-amber-900/20', desc: 'Contract analysis, risk flags', target: 'Paralegals, solo attorneys' },
+                          { id: 'finance', name: 'Financial Advisor', icon: DollarSign, color: 'text-green-400', bg: 'bg-green-900/20', desc: 'Portfolio analysis, reports', target: 'Financial planners' },
+                          { id: 'research', name: 'Research Assistant', icon: FlaskConical, color: 'text-purple-400', bg: 'bg-purple-900/20', desc: 'Literature review, paper drafts', target: 'PhD students, researchers' },
+                          { id: 'developer', name: 'Developer Copilot', icon: Code, color: 'text-cyan-400', bg: 'bg-cyan-900/20', desc: 'Code review, debugging, docs', target: 'Remote developers' },
+                          { id: 'content', name: 'Content Creator', icon: PenTool, color: 'text-pink-400', bg: 'bg-pink-900/20', desc: 'Scripts, newsletters, calendars', target: 'YouTubers, writers' },
+                          { id: 'support', name: 'Customer Support', icon: Headphones, color: 'text-orange-400', bg: 'bg-orange-900/20', desc: 'Ticket triage, responses', target: 'Support agents' },
+                          { id: 'pm', name: 'Project Manager', icon: ClipboardList, color: 'text-indigo-400', bg: 'bg-indigo-900/20', desc: 'Status reports, agendas', target: 'PMs, team leads' },
+                          { id: 'journalist', name: 'Journalist Assistant', icon: Newspaper, color: 'text-slate-400', bg: 'bg-slate-800/50', desc: 'Research, interview prep', target: 'Reporters, freelancers' },
+                        ].map((template) => (
+                          <button
+                            key={template.id}
+                            className={`flex items-start gap-3 p-3 rounded-lg ${template.bg} hover:opacity-80 transition-opacity text-left w-full border border-slate-700/50`}
+                            onClick={() => {/* TODO: Open template details */}}
+                            aria-label={`${template.name}: ${template.desc}`}
+                          >
+                            <template.icon className={`w-5 h-5 ${template.color} mt-0.5 flex-shrink-0`} />
+                            <div className="min-w-0">
+                              <div className="text-sm font-medium text-slate-200">{template.name}</div>
+                              <div className="text-xs text-slate-400 truncate">{template.desc}</div>
+                              <div className="text-xs text-slate-500 mt-1">For: {template.target}</div>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    </ScrollArea>
+                    <div className="mt-4 flex gap-2">
+                      <Button variant="outline" size="sm" className="gap-2">
+                        <Download className="w-4 h-4" />
+                        Install Template
+                      </Button>
+                      <Button variant="ghost" size="sm" className="gap-2">
+                        <Sparkles className="w-4 h-4" />
+                        Browse All
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </TabsContent>
