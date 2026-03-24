@@ -151,3 +151,17 @@ jobs:
           else
             echo "Binary not found - skipping size check"
           fi
+
+      - name: Verify Dioxus builds
+        run: |
+          echo "Checking Dioxus web module..."
+          cd superinstance
+          if [ -f "src/web/mod.rs" ]; then
+            echo "✅ Dioxus web module present"
+            if grep -q "Dioxus" src/web/mod.rs; then
+              echo "✅ Dioxus references found in web module"
+            fi
+          else
+            echo "❌ FAIL: Dioxus web module not found!"
+            exit 1
+          fi
