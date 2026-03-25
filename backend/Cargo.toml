@@ -1,0 +1,54 @@
+[package]
+name = "backend"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = []
+llm = ["llama_cpp_rs"]
+
+[dependencies]
+# Web framework
+axum = "0.7"
+tokio = { version = "1", features = ["full"] }
+tower = "0.4"
+tower-http = { version = "0.5", features = ["fs", "cors"] }
+
+# UI frameworks
+dioxus = { version = "0.5", features = ["web"] }
+ratatui = "0.28"
+crossterm = "0.27"
+
+# LLM inference (optional - has native build requirements)
+llama_cpp_rs = { version = "0.3", optional = true }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+toml = "0.8"
+
+# Database
+sqlx = { version = "0.8", features = ["runtime-tokio", "sqlite"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Utils
+reqwest = { version = "0.12", features = ["stream"] }
+anyhow = "1"
+thiserror = "1"
+
+[[bin]]
+name = "backend"
+path = "src/main.rs"
+
+[[bin]]
+name = "tui"
+path = "src/tui.rs"
+
+[profile.release]
+opt-level = "z"      # Optimize for size
+lto = true           # Link-time optimization
+codegen-units = 1    # Better optimization
+panic = "abort"      # Smaller panic handling
+strip = true         # Strip symbols
