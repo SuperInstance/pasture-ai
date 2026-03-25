@@ -4,6 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 [![Rust](https://img.shields.io/badge/Rust-1.75+-orange?style=for-the-badge&logo=rust)](https://rust-lang.org)
 [![Platform: Jetson](https://img.shields.io/badge/Platform-Jetson_Orin_Nano-green?style=for-the-badge)](https://developer.nvidia.com/embed-computing)
+[![Install in 60s](https://img.shields.io/badge/Install%20in%2060s-blue?style=for-the-badge)](https://install.superinstance.ai)
 
 ```
                     .-----------------------------------------.
@@ -105,6 +106,7 @@
 | **Memory** | Session | Session | **CRDT Memory Pasture** |
 | **Extensibility** | Plugins | Plugins | **breed.md files** |
 | **Year Cost** | $2,400/year | $0 (slow) | **$0** (after $499 hardware) |
+| **Try it yourself** | — | — | `curl -sSL https://install.superinstance.ai \| bash` |
 
 ---
 
@@ -954,9 +956,15 @@ SuperInstance can work alongside your existing agent frameworks:
 
 | | | |
 |:---:|:---:|:---:|
-| **TUI + Web Dashboard** | **TensorRT-LLM Breeding** | **Memory Pasture RAG** |
-| ![Dashboard](docs/screenshots/dashboard.gif) | ![Breeding](docs/screenshots/breeding.gif) | ![Memory](docs/screenshots/memory.gif) |
-| *Side-by-side view* | *Geometric snapping* | *CRDT in action* |
+| **TUI Dashboard** | **Dioxus Onboarding** | **Night School Breeding** |
+| ![TUI Dashboard](docs/screenshots/tui-dashboard.svg) | ![Onboarding](docs/screenshots/dioxus-onboarding.svg) | ![Breeding](docs/screenshots/geometric-breeding.svg) |
+| *Real-time monitoring* | *Zero Node.js setup* | *SLERP/TIES merging* |
+
+| | |
+|:---:|:---:|
+| **Multi-Jetson CRDT Sync** |
+| ![Memory Sync](docs/screenshots/memory-pasture-sync.svg) |
+| *Distributed memory* |
 
 ---
 
@@ -1043,3 +1051,23 @@ If you find SuperInstance useful, please consider giving it a star! It helps oth
   <strong>SuperInstance: Not a Superintelligence. A SuperInstance.</strong><br>
   <em>Breed your own AI Ranch. The Collie is waiting.</em>
 </p>
+
+---
+
+## 🤝 Contribute a Species
+
+**Drop a new `breed.md` in `genetics/` and open a PR — your species joins the Ranch forever.**
+
+No core code changes needed. Just Markdown DNA. The 4.2 MB binary stays small while your contribution grows the ecosystem.
+
+```bash
+# 1. Create your species
+mkdir -p genetics/traits/my-specialist
+
+# 2. Add your breed.md
+echo '# 🐄 Breed: My-Specialist\n\n## 🧬 Genetic Composition\n| Gene Trait | Weight | Description |\n|:-----------|:-------|:------------|\n| polite_tone | 0.8 | Professional style |\n\n## 🧠 System Prompt\n```\nYou are a specialist in...\n```' > genetics/traits/my-specialist/breed.md
+
+# 3. Open a PR with label "new-species"
+```
+
+**Every contribution makes the Ranch smarter — without making it bigger.**
