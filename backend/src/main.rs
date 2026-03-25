@@ -1,6 +1,8 @@
 //! Superinstance Backend MVP
 //! Axum server with breed parsing, LLM chat stub, and UI support
 
+pub mod cattle;
+
 use axum::{
     extract::{Path, State},
     http::StatusCode,
@@ -214,6 +216,44 @@ pub async fn collie_chat(
     cattle_chat(state, Json(req)).await
 }
 
+/// POST /api/chat - Main chat endpoint (Collie -> Cattle pipeline)
+pub async fn api_chat(
+    State(state): State<Arc<Mutex<AppState>>>,
+    Json(req): Json<cattle::ChatRequest>,
+) -> Result<Json<cattle::ChatResponse>, (StatusCode, Json<cattle::ChatResponse>)> {
+    info!("API chat request: {:?}", req.prompt.chars().take(50).collect::<String>());
+    
+    // Get cattle state
+    let cattle_state = {
+        let s = state.lock().await;
+        let mut cs = cattle::CattleState::new(s.model_path());
+        
+        // Load cattle-v1 breed config
+        if let Ok(breed) = cattle::load_default_breed() {
+            cs.breed_config = Some(breed);
+        }
+        Arc::new(Mutex::new(cs))
+    };
+    
+    // Collie herds the request to Cattle for inference
+    info!("Collie -> Cattle: routing chat request");
+    
+    match cattle::chat_completion(&cattle_state, req).await {
+        Ok(response) => Ok(Json(response)),
+        Err(e) => {
+            error!("Cattle chat completion failed: {}", e);
+            Err((
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(cattle::ChatResponse {
+                    response: format!("Error: {}", e),
+                    model: "phi3-mini".to_string(),
+                    tokens_used: None,
+                }),
+            ))
+        }
+    }
+}
+
 /// Download phi3-mini model
 async fn download_model(model_path: &PathBuf) -> Result<(), String> {
     use std::io::Write;
@@ -311,6 +351,7 @@ async fn main() -> anyhow::Result<()> {
         .route("/api/breeds/:name", get(get_breed))
         .route("/api/cattle", post(cattle_chat))
         .route("/api/collie", post(collie_chat))
+        .route("/api/chat", post(api_chat))
         .with_state(state);
     
     // Start server
