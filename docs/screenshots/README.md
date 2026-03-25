@@ -1,45 +1,46 @@
-# 📸 Screenshots & GIFs
+# SuperInstance Screenshots & Visual Assets
 
-This folder contains visual assets for the SuperInstance README and documentation.
+This directory contains high-quality visual assets for the SuperInstance Ranch documentation.
 
-## Required Screenshots
+## Files
 
-| File | Description | Status |
-|:-----|:------------|:-------|
-| `dashboard.gif` | TUI + Web dashboard side-by-side view | 📝 Placeholder |
-| `breeding.gif` | TensorRT-LLM breeding with geometric snapping | 📝 Placeholder |
-| `memory.gif` | Memory Pasture RAG with CRDT in action | 📝 Placeholder |
-| `install.gif` | Single-binary install process | 📝 Placeholder |
+| File | Description | Usage |
+|------|-------------|-------|
+| `tui-dashboard.svg` | Real-time TUI dashboard with live activity | Shows the terminal interface |
+| `dioxus-onboarding.svg` | Dioxus web onboarding wizard | Shows the web setup flow |
+| `geometric-breeding.svg` | Night School SLERP/TIES breeding | Visualizes the evolution pipeline |
+| `memory-pasture-sync.svg` | Multi-Jetson CRDT sync | Shows distributed memory architecture |
 
-## How to Capture
+## Static vs Animated
 
-Run the following on your Jetson Orin Nano:
+All files are **animated SVGs** that work in:
+- GitHub README (animated)
+- Browsers (animated)
+- Print/export (degrades gracefully)
 
-```bash
-# Terminal recording with asciinema
-asciinema rec dashboard.cast
+## Adding to README
 
-# Convert to GIF
-agg dashboard.cast dashboard.gif
-
-# Or use ttygif
-ttygif dashboard.cast
+```markdown
+![TUI Dashboard](docs/screenshots/tui-dashboard.svg)
+![Onboarding](docs/screenshots/dioxus-onboarding.svg)
+![Breeding](docs/screenshots/geometric-breeding.svg)
+![Memory Sync](docs/screenshots/memory-pasture-sync.svg)
 ```
 
-## Recommended Recording
+## Creating New Assets
 
-1. **dashboard.gif** - Show both TUI (terminal) and browser dashboard updating in real-time
-2. **breeding.gif** - Show the geometric constraint solver routing requests to optimal species
-3. **memory.gif** - Show CRDT memory being written and synced across sessions
-4. **install.gif** - One-command install on fresh Jetson
+When adding new screenshots:
+1. Use 800x500 canvas size for consistency
+2. Use the project color palette:
+   - Primary: `#06b6d4` (cyan)
+   - Accent: `#4ade80` (green)
+   - Warning: `#f59e0b` (amber)
+   - Background: `#0f172a` to `#1e293b` gradient
+3. Include animation where appropriate
+4. Add caption at bottom
 
-## Dimensions
+## Legacy Files
 
-- Width: 1200px recommended
-- Height: 800px recommended
-- Format: GIF, max 5MB each
-- Frame rate: 15-30 fps
-
-## Placeholder Files
-
-Until real screenshots are captured, the README uses text-based diagrams instead of actual GIFs.
+- `dashboard.txt`, `breeding.txt`, etc. are ASCII art placeholders
+- `dashboard.svg`, `breeding.svg`, etc. are earlier versions
+- New files (`tui-dashboard.svg`, etc.) are production-ready

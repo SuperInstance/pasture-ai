@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0c0a1d"/>
+      <stop offset="100%" style="stop-color:#1a1535"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#a855f7"/>
+    </linearGradient>
+    <filter id="glow3">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad3)"/>
+  
+  <!-- Title -->
+  <text x="400" y="35" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#f8fafc" text-anchor="middle">🌙 Night School: Geometric Breeding Pipeline</text>
+  <text x="400" y="55" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">SLERP + TIES LoRA Merging • Deterministic Evolution</text>
+  
+  <!-- Parent 1 (Sire) -->
+  <g transform="translate(100, 120)">
+    <rect x="0" y="0" width="150" height="80" rx="8" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2"/>
+    <text x="75" y="25" font-family="system-ui, sans-serif" font-size="20" text-anchor="middle">🐄</text>
+    <text x="75" y="45" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#f8fafc" text-anchor="middle">Sire (Parent 1)</text>
+    <text x="75" y="65" font-family="monospace" font-size="10" fill="#a855f7" text-anchor="middle">fitness: 0.85</text>
+    
+    <!-- Gene traits -->
+    <rect x="160" y="10" width="80" height="60" rx="4" fill="#1e1b4b" opacity="0.8"/>
+    <text x="200" y="28" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Genes:</text>
+    <text x="200" y="42" font-family="monospace" font-size="7" fill="#4ade80" text-anchor="middle">polite: 0.8</text>
+    <text x="200" y="54" font-family="monospace" font-size="7" fill="#4ade80" text-anchor="middle">concise: 0.4</text>
+    <text x="200" y="66" font-family="monospace" font-size="7" fill="#4ade80" text-anchor="middle">json: 0.2</text>
+  </g>
+  
+  <!-- Parent 2 (Dam) -->
+  <g transform="translate(100, 280)">
+    <rect x="0" y="0" width="150" height="80" rx="8" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2"/>
+    <text x="75" y="25" font-family="system-ui, sans-serif" font-size="20" text-anchor="middle">🐄</text>
+    <text x="75" y="45" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#f8fafc" text-anchor="middle">Dam (Parent 2)</text>
+    <text x="75" y="65" font-family="monospace" font-size="10" fill="#a855f7" text-anchor="middle">fitness: 0.78</text>
+    
+    <!-- Gene traits -->
+    <rect x="160" y="10" width="80" height="60" rx="4" fill="#1e1b4b" opacity="0.8"/>
+    <text x="200" y="28" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Genes:</text>
+    <text x="200" y="42" font-family="monospace" font-size="7" fill="#4ade80" text-anchor="middle">polite: 0.3</text>
+    <text x="200" y="54" font-family="monospace" font-size="7" fill="#4ade80" text-anchor="middle">concise: 0.9</text>
+    <text x="200" y="66" font-family="monospace" font-size="7" fill="#4ade80" text-anchor="middle">json: 0.6</text>
+  </g>
+  
+  <!-- SLERP Merge Visual -->
+  <g transform="translate(350, 150)">
+    <rect x="0" y="0" width="120" height="180" rx="8" fill="#1e1b4b" stroke="#a855f7" stroke-width="1"/>
+    <text x="60" y="25" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#a855f7" text-anchor="middle">SLERP</text>
+    <text x="60" y="42" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Merge</text>
+    
+    <!-- Animated merging circles -->
+    <circle cx="60" cy="100" r="35" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="5,5">
+      <animate attributeName="stroke-dashoffset" values="0;10" dur="1s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="45" cy="90" r="15" fill="#7c3aed" opacity="0.5">
+      <animate attributeName="cx" values="45;60" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="75" cy="110" r="15" fill="#a855f7" opacity="0.5">
+      <animate attributeName="cx" values="75;60" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Arrow -->
+    <path d="M60 140 L60 160" stroke="#a855f7" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <polygon points="60,170 55,160 65,160" fill="#a855f7"/>
+    
+    <text x="60" y="175" font-family="monospace" font-size="7" fill="#94a3b8" text-anchor="middle">weight: 0.6</text>
+  </g>
+  
+  <!-- Arrows from parents to SLERP -->
+  <path d="M250 160 Q300 160 350 200" stroke="#7c3aed" stroke-width="2" fill="none" stroke-dasharray="4,4">
+    <animate attributeName="stroke-dashoffset" values="0;-8" dur="1s" repeatCount="indefinite"/>
+  </path>
+  <path d="M250 320 Q300 320 350 280" stroke="#a855f7" stroke-width="2" fill="none" stroke-dasharray="4,4">
+    <animate attributeName="stroke-dashoffset" values="0;-8" dur="1s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- TIES Pruning -->
+  <g transform="translate(500, 150)">
+    <rect x="0" y="0" width="100" height="180" rx="8" fill="#1e1b4b" stroke="#f59e0b" stroke-width="1"/>
+    <text x="50" y="25" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#f59e0b" text-anchor="middle">TIES</text>
+    <text x="50" y="42" font-family="monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Prune</text>
+    
+    <!-- Grid showing weight pruning -->
+    <g transform="translate(15, 55)">
+      <rect x="0" y="0" width="10" height="10" fill="#4ade80"/>
+      <rect x="12" y="0" width="10" height="10" fill="#4ade80"/>
+      <rect x="24" y="0" width="10" height="10" fill="#334155"/>
+      <rect x="36" y="0" width="10" height="10" fill="#4ade80"/>
+      <rect x="48" y="0" width="10" height="10" fill="#334155"/>
+      
+      <rect x="0" y="12" width="10" height="10" fill="#334155"/>
+      <rect x="12" y="12" width="10" height="10" fill="#4ade80"/>
+      <rect x="24" y="12" width="10" height="10" fill="#4ade80"/>
+      <rect x="36" y="12" width="10" height="10" fill="#4ade80"/>
+      <rect x="48" y="12" width="10" height="10" fill="#334155"/>
+      
+      <rect x="0" y="24" width="10" height="10" fill="#4ade80"/>
+      <rect x="12" y="24" width="10" height="10" fill="#334155"/>
+      <rect x="24" y="24" width="10" height="10" fill="#334155"/>
+      <rect x="36" y="24" width="10" height="10" fill="#4ade80"/>
+      <rect x="48" y="24" width="10" height="10" fill="#4ade80"/>
+      
+      <rect x="0" y="36" width="10" height="10" fill="#4ade80"/>
+      <rect x="12" y="36" width="10" height="10" fill="#4ade80"/>
+      <rect x="24" y="36" width="10" height="10" fill="#4ade80"/>
+      <rect x="36" y="36" width="10" height="10" fill="#334155"/>
+      <rect x="48" y="36" width="10" height="10" fill="#334155"/>
+    </g>
+    
+    <text x="50" y="130" font-family="monospace" font-size="7" fill="#94a3b8" text-anchor="middle">Top 30% kept</text>
+    <text x="50" y="145" font-family="monospace" font-size="7" fill="#4ade80" text-anchor="middle">70% pruned</text>
+    
+    <!-- Arrow -->
+    <polygon points="50,160 45,150 55,150" fill="#f59e0b"/>
+  </g>
+  
+  <!-- Arrow from SLERP to TIES -->
+  <path d="M470 240 L500 240" stroke="#a855f7" stroke-width="2" fill="none" marker-end="url(#arrowhead2)"/>
+  <polygon points="500,240 490,235 490,245" fill="#a855f7"/>
+  
+  <!-- Offspring Result -->
+  <g transform="translate(620, 180)">
+    <rect x="0" y="0" width="150" height="120" rx="8" fill="#052e16" stroke="#4ade80" stroke-width="3" filter="url(#glow3)">
+      <animate attributeName="stroke-opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="75" y="30" font-family="system-ui, sans-serif" font-size="24" text-anchor="middle">🐄✨</text>
+    <text x="75" y="55" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#4ade80" text-anchor="middle">Offspring</text>
+    <text x="75" y="75" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">est. fitness: 0.82</text>
+    
+    <!-- Result genes -->
+    <rect x="15" y="85" width="120" height="25" rx="3" fill="#0a2612"/>
+    <text x="75" y="102" font-family="monospace" font-size="8" fill="#4ade80" text-anchor="middle">polite:0.6 concise:0.7 json:0.4</text>
+  </g>
+  
+  <!-- Arrow from TIES to Offspring -->
+  <path d="M600 240 L620 240" stroke="#4ade80" stroke-width="2" fill="none"/>
+  <polygon points="620,240 610,235 610,245" fill="#4ade80"/>
+  
+  <!-- Bottom info box -->
+  <rect x="100" y="420" width="600" height="60" rx="8" fill="#1e1b4b" opacity="0.8"/>
+  <text x="400" y="445" font-family="monospace" font-size="10" fill="#a855f7" text-anchor="middle">Night School: 02:00 Daily • Cull <0.4 fitness → Breed champions → Distill → Promote</text>
+  <text x="400" y="465" font-family="monospace" font-size="9" fill="#94a3b8" text-anchor="middle">All breeding is pure data (breed.md + LoRA weights) — zero core code changes</text>
+  
+  <!-- Caption -->
+  <text x="400" y="495" font-family="system-ui, sans-serif" font-size="10" fill="#475569" text-anchor="middle">Night School Breeding Pipeline - Deterministic Evolution via Geometric Merging</text>
+</svg>
