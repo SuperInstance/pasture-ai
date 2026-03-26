@@ -48,5 +48,14 @@ test
 prompt
 
 server.log
+
+# Rust/Cargo build artifacts
+backend/target/
+*.gguf
+backend.log
+backend/.quiet/
+backend/breeds/
+NOTIFICATION.md
+
 # Skills directory
 /skills/
