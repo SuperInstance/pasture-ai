@@ -1,9 +1,11 @@
 # 🐄 SuperInstance: The AI Ranch Ecosystem
 
-[![Status: Early Development](https://img.shields.io/badge/Status-Early_Development-yellow?style=for-the-badge)](https://github.com/SuperInstance/superinstance)
+[![CI](https://img.shields.io/github/actions/workflow/status/SuperInstance/superinstance/ci.yml?branch=main&style=for-the-badge&label=CI)](https://github.com/SuperInstance/superinstance/actions)
+[![crates.io](https://img.shields.io/crates/v/superinstance?style=for-the-badge&logo=rust)](https://crates.io/crates/superinstance)
+[![docs.rs](https://img.shields.io/docsrs/superinstance?style=for-the-badge&logo=rust)](https://docs.rs/superinstance)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 [![Rust](https://img.shields.io/badge/Rust-1.75+-orange?style=for-the-badge&logo=rust)](https://rust-lang.org)
-[![Platform: Jetson](https://img.shields.io/badge/Platform-Jetson_Orin_Nano-green?style=for-the-badge)](https://developer.nvidia.com/embed-computing)
+[![Platform](https://img.shields.io/badge/Platform-Jetson%20%7C%20RTX%20%7C%20CPU-green?style=for-the-badge)](https://github.com/SuperInstance/superinstance#installation)
 [![Install in 60s](https://img.shields.io/badge/Install%20in%2060s-blue?style=for-the-badge)](https://install.superinstance.ai)
 
 ```
