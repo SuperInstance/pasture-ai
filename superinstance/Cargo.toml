@@ -1,6 +1,6 @@
 [package]
 name = "superinstance"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 authors = ["SuperInstance Ranch <ranch@superinstance.ai>"]
 description = """
@@ -15,15 +15,10 @@ repository = "https://github.com/SuperInstance/superinstance"
 license = "MIT"
 keywords = [
     "ai",
-    "edge", 
+    "edge",
     "lora",
-    "jetson",
     "agents",
-    "open-genomics",
-    "evolutionary",
-    "orchestration",
-    "local-ai",
-    "tensorrt"
+    "local-ai"
 ]
 categories = [
     "science",
@@ -158,6 +153,15 @@ uuid = { version = "1.7", features = ["v4", "serde"] }
 # Dialoguer for onboarding CLI
 dialoguer = "0.11"
 console = "0.15"
+
+# CLI argument parsing
+clap = { version = "4", features = ["derive"] }
+
+# Webhook HMAC-SHA256 signature verification
+hmac = "0.12"
+sha2 = "0.10"
+hex = "0.4"
+subtle = "2.5"
 
 [features]
 default = []

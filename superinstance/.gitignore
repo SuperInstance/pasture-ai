@@ -32,7 +32,7 @@ node_modules/
 # Rust
 target/
 **/*.rs.bk
-Cargo.lock
+# Cargo.lock is committed for binary applications to ensure reproducible builds
 
 # General
 /build/

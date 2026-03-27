@@ -137,7 +137,7 @@ async fn main() -> Result<()> {
     
     // Initialize tracing
     let level = if args.verbose { Level::DEBUG } else { Level::INFO };
-    let subscriber = FmtSubscriber::builder()
+    FmtSubscriber::builder()
         .with_max_level(level)
         .with_target(false)
         .with_thread_ids(false)
@@ -214,7 +214,7 @@ async fn main() -> Result<()> {
     
     // Start the Web Dashboard (Axum + Dioxus)
     info!("🌐 Starting Web Dashboard on :{}...", config.port);
-    let web_config = WebConfig { port: config.port };
+    let web_config = WebConfig { port: config.port, enable_dashboard: true };
     let ranch_clone = Arc::clone(&ranch);
     let shutdown_rx_web = shutdown_tx.subscribe();
     tokio::spawn(async move {

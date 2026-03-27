@@ -312,20 +312,16 @@ impl BreedingEngine {
     }
     
     /// Tournament selection
-    /// 
+    ///
     /// Selects two parents by running tournaments among random candidates.
     /// Each tournament picks the fittest from a random subset.
-    /// 
-    /// # Panics
-    /// Does not panic - returns early if candidates list is empty.
+    ///
+    /// Callers must ensure `candidates` is non-empty (len >= 2).
     fn tournament_selection<'a>(
         &mut self,
         candidates: &'a [crate::evolution::AgentRecord],
     ) -> (&'a crate::evolution::AgentRecord, &'a crate::evolution::AgentRecord) {
-        // Safety check: ensure candidates is not empty
-        if candidates.is_empty() {
-            panic!("tournament_selection called with empty candidates");
-        }
+        debug_assert!(!candidates.is_empty(), "tournament_selection requires non-empty candidates");
         
         let tournament_size = 3.min(candidates.len());
         
