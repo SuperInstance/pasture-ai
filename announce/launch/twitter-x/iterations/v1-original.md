@@ -1,4 +1,22 @@
-# PastureAI v1.0 Launch Twitter Thread Draft
+# Twitter/X — Iteration 1: Original Draft (v1.0 era)
+
+> **STATUS: SUPERSEDED**
+>
+> **What this was:** The first Twitter thread draft, written for the v1.0 naming
+> (PastureAI) before the product was renamed SuperInstance for crates.io. Ten tweets,
+> feature-led, aimed at broad tech audience.
+>
+> **Why superseded:** Written before v0.2.0 shipped, so some claims (Discord integration
+> complete, full TensorRT-LLM) were aspirational rather than real. The thread structure
+> is sound — opening hook, technical depth, install CTA — but the tone is too promotional
+> ("Excited to announce!") for the engineering audience we're targeting. Also 10 tweets
+> is too long for a launch thread; engagement drops sharply after tweet 3.
+>
+> **What to keep for FINAL:** The cost comparison numbers ($0 vs $2400/year). The
+> species emoji list (🐄🦆🐑🐐🐗🐔🐎) — visual and memorable. The 60-second install
+> claim. The "breed responsibly" sign-off is charming and on-brand.
+
+---
 
 ## Thread Structure
 
